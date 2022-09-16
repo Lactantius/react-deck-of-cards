@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/react-deck-of-cards/static/css/main.15210db6.css",
+    "main.js": "/react-deck-of-cards/static/js/main.a70e7d2c.js",
+    "static/js/787.29b8ed4a.chunk.js": "/react-deck-of-cards/static/js/787.29b8ed4a.chunk.js",
+    "index.html": "/react-deck-of-cards/index.html",
+    "main.15210db6.css.map": "/react-deck-of-cards/static/css/main.15210db6.css.map",
+    "main.a70e7d2c.js.map": "/react-deck-of-cards/static/js/main.a70e7d2c.js.map",
+    "787.29b8ed4a.chunk.js.map": "/react-deck-of-cards/static/js/787.29b8ed4a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.15210db6.css",
+    "static/js/main.a70e7d2c.js"
+  ]
+}
