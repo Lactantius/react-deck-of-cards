@@ -16,13 +16,7 @@ function drawCard(deck: string): Promise<CardData> {
       imgURL: json.cards[0].image,
       value: json.cards[0].code,
     }));
-  /* .catch((err) => {
-   *   const drawCardButton = cardsControls.querySelector(
-   *     "#draw-card-button"
-   *   ) as HTMLButtonElement;
-   *   cardsControls.removeChild(drawCardButton);
-   *   return "none";
-   * }); */
+  // Not caught here, but in the addCard function
 }
 
 function CardList(): JSX.Element {
@@ -39,6 +33,11 @@ function CardList(): JSX.Element {
       .catch((err) => setDeckId(""));
   };
 
+  const newDeck = () => {
+    setCards([]);
+    getDeck();
+  };
+
   return (
     <div className="CardList">
       {deckId ? (
@@ -47,6 +46,7 @@ function CardList(): JSX.Element {
           <button>Autodraw</button>
         </>
       ) : null}
+      <button onClick={() => newDeck()}>New Deck?</button>
       <div className="CardList-container">
         {cards.map((card) => (
           <Card imgURL={card.imgURL} value={card.value} key={card.value} />
