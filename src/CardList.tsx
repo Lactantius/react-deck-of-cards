@@ -19,10 +19,20 @@ function drawCard(deck: string): Promise<CardData> {
   // Not caught here, but in the addCard function
 }
 
+function useToggle(
+  initial: boolean
+): [boolean, (arg0: boolean) => void, () => void] {
+  const [state, setState] = useState(initial);
+  const toggleState = () => {
+    setState((state) => !state);
+  };
+  return [state, setState, toggleState];
+}
+
 function CardList(): JSX.Element {
   const [deckId, setDeckId] = useState("");
   const [cards, setCards] = useState(Array<CardData>);
-  const [drawAll, setDrawAll] = useState(false);
+  const [drawAll, setDrawAll, toggleDrawAll] = useToggle(false);
 
   const addCard = (deck: string) => {
     drawCard(deck)
@@ -65,7 +75,7 @@ function CardList(): JSX.Element {
     return () => {
       if (intervalId) clearInterval(intervalId);
     };
-  }, [drawAll, setDrawAll, deckId]);
+  }, [drawAll, toggleDrawAll, deckId]);
 
   return (
     <div className="CardList">
@@ -73,7 +83,7 @@ function CardList(): JSX.Element {
         {deckId ? (
           <>
             <button onClick={() => addCard(deckId)}>Draw a card</button>
-            <button onClick={() => setDrawAll(true)}>Autodraw</button>
+            <button onClick={() => toggleDrawAll()}>Autodraw</button>
           </>
         ) : null}
         <button onClick={() => newDeck()}>New Deck?</button>
