@@ -40,13 +40,15 @@ function CardList(): JSX.Element {
 
   return (
     <div className="CardList">
-      {deckId ? (
-        <>
-          <button onClick={() => addCard(deckId)}>Draw a card</button>
-          <button>Autodraw</button>
-        </>
-      ) : null}
-      <button onClick={() => newDeck()}>New Deck?</button>
+      <div className="CardList-buttons">
+        {deckId ? (
+          <>
+            <button onClick={() => addCard(deckId)}>Draw a card</button>
+            <button>Autodraw</button>
+          </>
+        ) : null}
+        <button onClick={() => newDeck()}>New Deck?</button>
+      </div>
       <div className="CardList-container">
         {cards.map((card) => (
           <Card imgURL={card.imgURL} value={card.value} key={card.value} />

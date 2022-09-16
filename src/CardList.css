@@ -1,3 +1,19 @@
 .CardList {
   display: grid;
 }
+
+.CardList-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.CardList-buttons button {
+  font-size: 1.5rem;
+  padding: 0.8rem;
+  color: white;
+  background-color: #2468ee;
+  border: none;
+  border-radius: 5px;
+}
