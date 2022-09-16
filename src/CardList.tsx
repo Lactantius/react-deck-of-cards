@@ -3,14 +3,14 @@ import Card, { CardData } from "./Card";
 import "./CardList.css";
 
 function getDeck(): Promise<string> {
-  return fetch("http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
+  return fetch("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
     .then((res) => res.json())
     .then((json) => json.deck_id)
     .catch((err) => err);
 }
 
 function drawCard(deck: string): Promise<CardData> {
-  return fetch(`http://deckofcardsapi.com/api/deck/${deck}/draw/?count=1`)
+  return fetch(`https://deckofcardsapi.com/api/deck/${deck}/draw/?count=1`)
     .then((res) => res.json())
     .then((json) => ({
       imgURL: json.cards[0].image,
