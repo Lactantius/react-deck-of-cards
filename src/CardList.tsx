@@ -22,15 +22,15 @@ function drawCard(deck: string): Promise<CardData> {
 function CardList(): JSX.Element {
   const [deckId, setDeckId] = useState("");
   const [cards, setCards] = useState(Array<CardData>);
-
-  useEffect(() => {
-    getDeck().then((id) => setDeckId(id));
-  }, []);
+  const [drawAll, setDrawAll] = useState(false);
 
   const addCard = (deck: string) => {
     drawCard(deck)
       .then((card) => setCards([...cards, card]))
-      .catch((err) => setDeckId(""));
+      .catch((err) => {
+        setDeckId("");
+        setDrawAll(false);
+      });
   };
 
   const newDeck = () => {
@@ -38,13 +38,42 @@ function CardList(): JSX.Element {
     getDeck();
   };
 
+  useEffect(() => {
+    getDeck().then((id) => setDeckId(id));
+  }, []);
+
+  useEffect(() => {
+    /* if (drawAll && !timerRef.current) {
+     *   timerRef.current = setInterval(() => {
+     *     addCard(deckId);
+     *     console.log(`Interval ${timerRef.current}`);
+     *   }, 1000);
+     * } */
+
+    /* return () => {
+     *   if (timerRef.current) clearInterval(timerRef.current);
+     *   timerRef.current = null;
+     * }; */
+
+    const intervalId = drawAll
+      ? setInterval(() => {
+          addCard(deckId);
+          console.log(`Interval ${intervalId}`);
+        }, 1000)
+      : null;
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [drawAll, setDrawAll, deckId]);
+
   return (
     <div className="CardList">
       <div className="CardList-buttons">
         {deckId ? (
           <>
             <button onClick={() => addCard(deckId)}>Draw a card</button>
-            <button>Autodraw</button>
+            <button onClick={() => setDrawAll(true)}>Autodraw</button>
           </>
         ) : null}
         <button onClick={() => newDeck()}>New Deck?</button>
