@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import App from "./App";
+import CardList from "./CardList";
 
 it("renders", () => {
-  render(<App />);
+  render(<CardList />);
 });
