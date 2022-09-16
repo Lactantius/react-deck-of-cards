@@ -33,15 +33,20 @@ function CardList(): JSX.Element {
     getDeck().then((id) => setDeckId(id));
   }, []);
 
-  const addCard = async (deck: string) => {
-    const card = await drawCard(deck);
-    setCards([...cards, card]);
+  const addCard = (deck: string) => {
+    drawCard(deck)
+      .then((card) => setCards([...cards, card]))
+      .catch((err) => setDeckId(""));
   };
 
   return (
     <div className="CardList">
-      <button onClick={() => addCard(deckId)}>Draw a card</button>
-      <button>Autodraw</button>
+      {deckId ? (
+        <>
+          <button onClick={() => addCard(deckId)}>Draw a card</button>
+          <button>Autodraw</button>
+        </>
+      ) : null}
       <div className="CardList-container">
         {cards.map((card) => (
           <Card imgURL={card.imgURL} value={card.value} key={card.value} />
